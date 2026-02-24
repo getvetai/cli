@@ -1,0 +1,49 @@
+{
+  "name": "@getvetai/cli",
+  "version": "0.3.0",
+  "description": "Security audit CLI for AI skills and MCP servers — scan, audit, and score tools before you install them",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "vet": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getvetai/cli.git"
+  },
+  "bugs": "https://github.com/getvetai/cli/issues",
+  "homepage": "https://getvet.ai",
+  "keywords": [
+    "ai",
+    "security",
+    "audit",
+    "mcp",
+    "openclaw",
+    "skills",
+    "tools",
+    "trust",
+    "scanner"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "ora": "^8.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
