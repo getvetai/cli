@@ -1,6 +1,6 @@
 {
   "name": "@getvetai/cli",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Security audit CLI for AI skills and MCP servers — scan, audit, and score tools before you install them",
   "type": "module",
   "license": "MIT",
