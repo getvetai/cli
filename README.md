@@ -2,7 +2,7 @@
 
 Security audit CLI for AI skills and MCP servers. Scan, audit, and discover tools before you install them.
 
-🌐 **Registry:** [getvet.ai](https://getvet.ai) — 20,000+ AI tools cataloged and scored
+🌐 **Registry:** [getvet.ai](https://getvet.ai) — 23,000+ AI tools verified and scored
 
 ## Install
 
@@ -15,12 +15,6 @@ Or run without installing:
 ```bash
 npx @getvetai/cli scan .
 ```
-
-## What's New in v0.3.0
-
-- **`vet find --limit <n>`** — control how many results to return (default: 10, max: 48)
-- **`vet find --type <type>`** — filter by `skill`, `mcp`, or `all`
-- **20,000+ tools** in the registry (up from 12K) — now indexing 10 sources including Smithery, mcp.so, MCP Registry, PyPI, npm, GitHub, and more
 
 ## Commands
 
@@ -99,20 +93,41 @@ vet install @modelcontextprotocol/server-github
 vet install -g some-mcp-server
 ```
 
-## Trust Scores
+## Verification Levels
 
-| Score | Badge | Meaning |
+| Level | Badge | Meaning |
 |-------|-------|---------|
-| 75+ | ✅ Certified | No critical issues, good practices |
-| 50–74 | 🔍 Reviewed | Some concerns, use with caution |
-| 25–49 | ⚠️ Unverified | Not yet reviewed or limited info |
-| 0–24 | 🚫 Flagged | Critical security issues found |
+| L2 | ✅ Verified | Installs, boots, tools discovered and tested |
+| L1 | 🔍 Boots | Installs and boots successfully |
+| L0 | ⚠️ Indexed | Cataloged, not yet verified |
 
 ## What It Detects
 
 - **Permissions:** shell execution, file I/O, network access, browser control, database queries, crypto operations
 - **Security issues:** destructive commands, remote code execution, dynamic eval, credential patterns, elevated privileges
 - **MCP-specific:** tool parameter analysis, transport detection (stdio/http/sse), runtime detection
+- **Requirements:** environment variables, API keys, Docker dependencies
+
+## API Access
+
+Access verified tool schemas programmatically. Create a free API key at [getvet.ai/dashboard](https://getvet.ai/dashboard) → API Keys.
+
+```bash
+# Fetch tool schemas
+curl -H "x-api-key: vet_sk_YOUR_KEY" https://getvet.ai/api/v1/tools/TOOL_SLUG/schemas
+
+# Or use Bearer token
+curl -H "Authorization: Bearer vet_sk_YOUR_KEY" https://getvet.ai/api/v1/tools/TOOL_SLUG/schemas
+
+# Bulk fetch (multiple tools at once)
+curl -X POST \
+  -H "x-api-key: vet_sk_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"slugs":["tool-1","tool-2"]}' \
+  https://getvet.ai/api/v1/tools/schemas/bulk
+```
+
+See [getvet.ai/get-started](https://getvet.ai/get-started) for full documentation.
 
 ## Links
 
