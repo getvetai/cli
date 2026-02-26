@@ -11,7 +11,7 @@ const program = new Command()
 program
   .name('vet')
   .description('Security audit CLI for AI skills & MCP servers')
-  .version('0.4.2')
+  .version('0.4.4')
 
 program
   .command('scan')
