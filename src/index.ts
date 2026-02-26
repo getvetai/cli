@@ -5,6 +5,7 @@ import { scanCommand } from './commands/scan.js'
 import { auditCommand } from './commands/audit.js'
 import { findCommand } from './commands/find.js'
 import { installCommand } from './commands/install.js'
+import { loginCommand, logoutCommand, whoamiCommand } from './commands/login.js'
 
 const program = new Command()
 
@@ -49,5 +50,21 @@ program
   .option('-g, --global', 'Install globally')
   .option('--skill', 'Install as OpenClaw skill via clawhub')
   .action(installCommand)
+
+program
+  .command('login')
+  .description('Log in to Vet')
+  .option('--api-key <key>', 'Use an API key directly')
+  .action(loginCommand)
+
+program
+  .command('logout')
+  .description('Log out of Vet')
+  .action(logoutCommand)
+
+program
+  .command('whoami')
+  .description('Show current logged-in user')
+  .action(whoamiCommand)
 
 program.parse()

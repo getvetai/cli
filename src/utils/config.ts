@@ -1,6 +1,29 @@
-import { readFileSync, existsSync, readdirSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, unlinkSync, existsSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { homedir } from 'os'
+
+// ─── Auth config (~/.vet/config.json) ───
+export interface VetAuthConfig {
+  apiKey: string
+  email: string
+  plan: string
+}
+
+const AUTH_CONFIG_DIR = join(homedir(), '.vet')
+const AUTH_CONFIG_PATH = join(AUTH_CONFIG_DIR, 'config.json')
+
+export function readAuthConfig(): VetAuthConfig | null {
+  try { return JSON.parse(readFileSync(AUTH_CONFIG_PATH, 'utf-8')) } catch { return null }
+}
+
+export function writeAuthConfig(config: VetAuthConfig) {
+  mkdirSync(AUTH_CONFIG_DIR, { recursive: true })
+  writeFileSync(AUTH_CONFIG_PATH, JSON.stringify(config, null, 2), { mode: 0o600 })
+}
+
+export function deleteAuthConfig() {
+  try { unlinkSync(AUTH_CONFIG_PATH) } catch {}
+}
 
 export interface DiscoveredTool {
   name: string

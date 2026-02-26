@@ -1,9 +1,18 @@
+import { readAuthConfig } from './config.js'
+
 const API_BASE = 'https://getvet.ai'
+
+function getHeaders(): Record<string, string> {
+  const headers: Record<string, string> = { 'User-Agent': 'vet-cli/0.4.4' }
+  const config = readAuthConfig()
+  if (config?.apiKey) headers['x-api-key'] = config.apiKey
+  return headers
+}
 
 export async function lookupTool(slug: string): Promise<any | null> {
   try {
     const resp = await fetch(`${API_BASE}/api/skills/${encodeURIComponent(slug)}`, {
-      headers: { 'User-Agent': 'vet-cli/0.3.0' },
+      headers: getHeaders(),
       signal: AbortSignal.timeout(5000),
     })
     if (resp.ok) return await resp.json()
@@ -17,7 +26,7 @@ export async function searchTools(query: string, options?: { limit?: number; typ
     const params = new URLSearchParams({ q: query, limit: String(limit) })
     if (options?.type && options.type !== 'all') params.set('type', options.type)
     const resp = await fetch(`${API_BASE}/api/skills/search?${params}`, {
-      headers: { 'User-Agent': 'vet-cli/0.3.0' },
+      headers: getHeaders(),
       signal: AbortSignal.timeout(5000),
     })
     if (resp.ok) {
@@ -32,7 +41,7 @@ export async function requestDeepScan(slug: string): Promise<any | null> {
   try {
     const resp = await fetch(`${API_BASE}/api/tools/${encodeURIComponent(slug)}/deep-scan`, {
       method: 'POST',
-      headers: { 'User-Agent': 'vet-cli/0.3.0', 'Content-Type': 'application/json' },
+      headers: { ...getHeaders(), 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(10000),
     })
     if (resp.ok) return await resp.json()
