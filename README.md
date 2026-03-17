@@ -2,7 +2,7 @@
 
 Security audit CLI for AI skills and MCP servers. Scan, audit, and discover tools before you install them.
 
-🌐 **Registry:** [getvet.ai](https://getvet.ai) — 85,000+ AI tools verified and scored
+🌐 **Registry:** [getvet.ai](https://getvet.ai) — 123,000+ AI tools verified and scored
 
 ## Install
 
