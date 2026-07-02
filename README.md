@@ -1,5 +1,7 @@
 # @getvetai/cli
 
+[![Vet Security Report](https://getvet.ai/badge/npm-getvetai-cli.svg)](https://getvet.ai/skill/npm-getvetai-cli)
+
 Security audit CLI for AI skills and MCP servers. Scan, audit, and discover tools before you install them.
 
 🌐 **Registry:** [getvet.ai](https://getvet.ai) — 136,000+ AI tools verified and scored
